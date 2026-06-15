@@ -1,0 +1,286 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    @apply bg-surface-950 text-white font-sans;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+
+  button {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-900;
+    transition: all 0.2s ease;
+  }
+
+  input, textarea, select {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-200 active:scale-95 shadow-glow;
+  }
+
+  .btn-secondary {
+    @apply bg-surface-800 hover:bg-surface-700 active:bg-surface-900 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-200 active:scale-95 border border-surface-700;
+  }
+
+  .btn-accent {
+    @apply bg-accent-500 hover:bg-accent-400 active:bg-accent-600 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-200 active:scale-95 shadow-glow-accent;
+  }
+
+  .btn-danger {
+    @apply bg-danger hover:bg-red-400 active:bg-red-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-200 active:scale-95;
+  }
+
+  .card {
+    @apply bg-surface-900 border border-surface-800 rounded-3xl p-6 shadow-card-dark;
+  }
+
+  .card-elevated {
+    @apply bg-surface-800 border border-surface-700 rounded-3xl p-6 shadow-elevated;
+  }
+
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl;
+  }
+
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent;
+  }
+
+  .screen-container {
+    @apply min-h-screen bg-surface-950 flex flex-col max-w-md mx-auto relative overflow-hidden;
+  }
+
+  .page-header {
+    @apply flex items-center gap-4 p-4 pt-safe-top;
+  }
+
+  .bottom-nav {
+    @apply fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-surface-900/95 backdrop-blur-xl border-t border-surface-800 pb-safe-bottom;
+  }
+
+  .feature-card {
+    @apply bg-surface-900 border border-surface-800 rounded-3xl p-5 active:scale-95 transition-all duration-200 hover:border-primary-500/50 hover:shadow-glow cursor-pointer;
+  }
+
+  .voice-btn {
+    @apply w-20 h-20 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-glow active:scale-90 transition-all duration-200 cursor-pointer;
+  }
+
+  .sos-btn {
+    @apply w-40 h-40 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-glow-red active:scale-90 transition-all duration-200 cursor-pointer;
+  }
+
+  .wave-bar {
+    @apply w-1 bg-primary-400 rounded-full;
+    animation: wave 1.5s ease-in-out infinite;
+  }
+
+  .wave-bar:nth-child(1) { animation-delay: 0s; height: 12px; }
+  .wave-bar:nth-child(2) { animation-delay: 0.1s; height: 20px; }
+  .wave-bar:nth-child(3) { animation-delay: 0.2s; height: 28px; }
+  .wave-bar:nth-child(4) { animation-delay: 0.3s; height: 20px; }
+  .wave-bar:nth-child(5) { animation-delay: 0.4s; height: 12px; }
+  .wave-bar:nth-child(6) { animation-delay: 0.5s; height: 20px; }
+  .wave-bar:nth-child(7) { animation-delay: 0.6s; height: 28px; }
+
+  .camera-viewfinder {
+    @apply relative w-full aspect-[3/4] bg-surface-900 rounded-3xl overflow-hidden border-2 border-surface-700;
+  }
+
+  .scan-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #2563eb, transparent);
+    animation: scanLine 2s linear infinite;
+  }
+
+  .corner-bracket {
+    @apply absolute w-8 h-8 border-primary-400;
+    border-width: 3px;
+  }
+
+  .corner-bracket.tl {
+    @apply top-4 left-4;
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+  }
+
+  .corner-bracket.tr {
+    @apply top-4 right-4;
+    border-left: none;
+    border-bottom: none;
+    border-top-right-radius: 4px;
+  }
+
+  .corner-bracket.bl {
+    @apply bottom-4 left-4;
+    border-right: none;
+    border-top: none;
+    border-bottom-left-radius: 4px;
+  }
+
+  .corner-bracket.br {
+    @apply bottom-4 right-4;
+    border-left: none;
+    border-top: none;
+    border-bottom-right-radius: 4px;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold;
+  }
+
+  .badge-primary {
+    @apply badge bg-primary-500/20 text-primary-300 border border-primary-500/30;
+  }
+
+  .badge-success {
+    @apply badge bg-success/20 text-green-300 border border-success/30;
+  }
+
+  .badge-warning {
+    @apply badge bg-warning/20 text-yellow-300 border border-warning/30;
+  }
+
+  .badge-danger {
+    @apply badge bg-danger/20 text-red-300 border border-danger/30;
+  }
+
+  .skeleton {
+    @apply bg-surface-800 rounded-xl animate-pulse;
+  }
+
+  .divider {
+    @apply border-surface-800;
+  }
+
+  .input-field {
+    @apply w-full bg-surface-800 border border-surface-700 rounded-2xl px-4 py-3 text-white placeholder-surface-500 focus:border-primary-500 transition-colors;
+  }
+
+  .section-title {
+    @apply text-xl font-bold text-white;
+  }
+
+  .section-subtitle {
+    @apply text-sm text-surface-400;
+  }
+}
+
+@layer utilities {
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 12px);
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 12px);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes scanLine {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+@keyframes ripple {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(2.5); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ---- Accessibility: font size (scales rem-based UI) ---- */
+html.font-small  { font-size: 14px; }
+html.font-normal { font-size: 16px; }
+html.font-large  { font-size: 19px; }
+
+/* ---- Accessibility: high-contrast mode ---- */
+html.high-contrast body { background: #000 !important; }
+html.high-contrast .screen-container { background: #000 !important; }
+html.high-contrast .bg-surface-900,
+html.high-contrast .bg-surface-800,
+html.high-contrast .feature-card,
+html.high-contrast .card { background: #000 !important; border-color: #fff !important; }
+html.high-contrast .text-surface-300,
+html.high-contrast .text-surface-400,
+html.high-contrast .text-surface-500,
+html.high-contrast .text-surface-600 { color: #fff !important; }
+html.high-contrast .border-surface-800,
+html.high-contrast .border-surface-700 { border-color: #fff !important; }
+html.high-contrast .btn-primary,
+html.high-contrast .btn-accent { background: #ffd400 !important; color: #000 !important; }
+html.high-contrast .btn-secondary { background: #000 !important; color: #fff !important; border: 2px solid #fff !important; }
+html.high-contrast a, html.high-contrast .text-primary-400 { color: #ffd400 !important; }
